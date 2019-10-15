@@ -5,8 +5,8 @@ const Movie = (props) => {
   const [movie, setMovie] = useState({});
  
   useEffect(() => {
-    const id = 1;
-    // const id = props.match.params.id;
+    // const id = 1;
+    const id = props.match.params.id;
     
     // change ^^^ that line and grab the id from the URL
     // You will NEED to add a dependency array to this effect hook
@@ -15,7 +15,7 @@ const Movie = (props) => {
         .get(`http://localhost:5000/api/movies/${id}`)
         .then(response => {
           console.log(response)
-          setMovie(response);
+          setMovie(response.data);
         })
         .catch(error => {
           console.error(error);
@@ -29,7 +29,7 @@ const Movie = (props) => {
   //   addToSavedList(movie)
   // }
 
-  if (!movie) {
+  if (!movie.title) {
     return <div>Loading movie information...</div>;
   }
 
